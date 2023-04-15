@@ -1,0 +1,15 @@
+@keyframes typing {
+  10%,
+  90% {
+    width: 100%;
+  }
+  40%,
+  60% {
+    width: 0;
+  }
+}
+@keyframes caret {
+  50% {
+    color: transparent;
+  }
+}

@@ -1,58 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect } from "react";
+import "./styles/App.css";
+import { ThemeProvider, useMediaQuery } from "@mui/material";
+import { theme } from "./MaterialUI/MuiTheme";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Route, Routes } from "react-router-dom";
+import { changeThemeMode } from "./app/actions";
+import { connect } from "react-redux";
+import PublicRoute from "./routes/PublicRoute";
 
-function App() {
+import Home from "./pages/Home";
+import PrivateRoute from "./routes/PrivateRoute";
+import Error404 from "./pages/Error404";
+
+const App = (props) => {
+  const { mode, changeThemeMode } = props;
+
+  // Set mode() based on
+  // 1. Whether userPrefersDarkMode
+  // 2. And then Change if user toggles the mode
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  useEffect(() => {
+    if (prefersDarkMode) {
+      changeThemeMode("change", "dark");
+    }
+  }, [prefersDarkMode]);
+
+  const newTheme = theme(mode);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
-}
+    <ThemeProvider theme={newTheme}>
+      <CssBaseline />
+      <Routes>
+        {/* PUBLIC Routes */}
+        <Route exact path="/" element={<PublicRoute component={Home} />} />
 
-export default App;
+        {/* PRIVATE Routes */}
+        {/* <Route exact path="/abcd" element={<PrivateRoute component={Home} />} /> */}
+
+        {/* Note: All Routes to be added above this */}
+        <Route path="*" element={<PublicRoute component={Error404} />} />
+      </Routes>
+    </ThemeProvider>
+  );
+};
+
+const mapStateToProps = (state) => {
+  const { common, homePage } = state;
+  return {
+    mode: common.mode,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeThemeMode: (type, mode) => {
+      dispatch(changeThemeMode(type, mode));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

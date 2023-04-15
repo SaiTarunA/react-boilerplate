@@ -1,3 +1,45 @@
+# Hello Everyone,
+
+- This is a boilerplate code made with React, Redux, react-router-dom, Material UI, axios.
+- This provides you with an initial boilerplate code to start with your project. So that you don't have to install the same packages and wirte the same code again and again.
+- Below are the changes you can make inorder to make it your own and start working on the project.
+
+# Changes in
+
+## package.json
+
+Change name to your folder name
+
+## /public/index.html
+
+Change necessary icons and title of project
+
+## /routes/PrivateRoute.js
+
+need to change isAuthenticated and add logic of your own.
+
+## /config.js
+
+Change title, subtitle to your website (Ex: SAI TARUN, blogs)
+
+## public
+
+Go to https://favicon.io/favicon-generator/. Generate your favicon and then download and extract zip.
+
+### Change favicon.ico
+
+Change original favicon.ico with the one you generated
+
+### Change logo192, logo512
+
+Change original _logo192_, _logo512_ with **android-chrome-192x192**, **android-chrome-192x192**
+
+### Change manifest.json name, short_name to your liking
+
+## App.js
+
+Make sure to add any route you specify in config.js to App.js also(If not added).
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
