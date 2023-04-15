@@ -1,4 +1,6 @@
-# Hello Everyone,
+# React Boilerplate Code
+
+Hello Everyone,
 
 - This is a boilerplate code made with React, Redux, react-router-dom, Material UI, axios.
 - This provides you with an initial boilerplate code to start with your project. So that you don't have to install the same packages and wirte the same code again and again.
